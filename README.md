@@ -32,13 +32,13 @@ To run this application locally, you will need Node.js and npm (Node Package Man
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/a2z-news-react-app.git
+   git clone https://github.com/Thevaibhavgarg/AtoZ_News-ReactJs.git
    ```
 
 2. Change your working directory to the project folder:
 
    ```bash
-   cd a2z-news-react-app
+   cd AtoZ_News-ReactJs
    ```
 
 3. Install the required dependencies:
@@ -66,7 +66,7 @@ This will start the development server and open the app in your default web brow
 
 ## APIs Used
 
-The app uses the [News API](https://newsapi.org/) to fetch news data. You will need to obtain an API key from the News API website and configure it in your app for data retrieval.
+The app uses the [News API](https://newsapi.org/) to fetch news data. You will need to obtain an API key from the News API website and configure it in your app for data retrieval you find the api key attribute in news component just change the key to newly obtained key.
 
 ## Contributing
 
