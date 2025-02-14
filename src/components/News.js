@@ -315,7 +315,7 @@ export class News extends Component {
                 }],
             loading: true,
             page: 1,
-            totalResults: 0
+            totalResults: 5
         }
         document.title = `${this.capatalizeFirstLetter(this.props.category)} - AtoZ News`
     }
@@ -327,7 +327,7 @@ export class News extends Component {
         this.props.setProgress(30);
         let parsedData = await data.json();
         this.props.setProgress(70);
-        if(parsedData.articles !== 'undefined'){
+        if(parsedData.articles !== 0){
             this.setState({
                 articles: parsedData.articles,
                 totalResults: parsedData.totalResults,
@@ -363,7 +363,7 @@ export class News extends Component {
         this.props.setProgress(30);
         let parsedData = await data.json();
         this.props.setProgress(70);
-        if(parsedData.articles !== 'undefined'){
+        if(parsedData.articles !== 0){
             this.setState({
                 articles: this.state.articles.concat(parsedData.articles),
                 totalResults: parsedData.totalResults,
