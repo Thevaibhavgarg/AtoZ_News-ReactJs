@@ -11,10 +11,10 @@ export class News extends Component {
     }
 
     static defaultProps = {
-        country: 'in',
+        country: 'us',
         pageSize: 8,
         category: 'general',
-        apiKey: 'c6f6aa3b134b425a96e9897f32e4cc60'
+        apiKey: process.env.REACT_APP_API_KEY
     }
 
     static propsTypes = {
