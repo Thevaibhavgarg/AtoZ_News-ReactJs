@@ -327,7 +327,7 @@ export class News extends Component {
         this.props.setProgress(30);
         let parsedData = await data.json();
         this.props.setProgress(70);
-        if(parsedData.articles.length !== 0){
+        if(parsedData.articles !== 'undefined'){
             this.setState({
                 articles: parsedData.articles,
                 totalResults: parsedData.totalResults,
@@ -363,7 +363,7 @@ export class News extends Component {
         this.props.setProgress(30);
         let parsedData = await data.json();
         this.props.setProgress(70);
-        if(parsedData.articles.length !== 0){
+        if(parsedData.articles !== 'undefined'){
             this.setState({
                 articles: this.state.articles.concat(parsedData.articles),
                 totalResults: parsedData.totalResults,
