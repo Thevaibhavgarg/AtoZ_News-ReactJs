@@ -334,6 +334,11 @@ export class News extends Component {
                 loading: false,
             })
         }
+        else{
+            this.setState({
+                loading: false
+            })
+        }
         this.props.setProgress(100);
     }
 
