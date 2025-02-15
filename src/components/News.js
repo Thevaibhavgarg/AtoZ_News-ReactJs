@@ -27,7 +27,8 @@ export class News extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            articles:[{
+            articles:[
+                {
                 "source": {
                 "id": null,
                 "name": "Biztoc.com"
@@ -312,7 +313,8 @@ export class News extends Component {
                 "urlToImage": "https://blogger.googleusercontent.com/img/a/AVvXsEgOLqa0ZHHC6WrbZ5y5smIbWedC2P0LfRWC6M2QrEjvgqWPRgCByI9RU4VZCwgwc7AcbNX7gbn1Qs34bOMV-fXPgEuqCDo9aK0GCm2JCM1vWSaZVkchgAnsnwwrC7fCshq0XXqcyE7KxkvQhldrVtppR8z-Ut0eF7QGEPED1gOVxrRbwPyhgBecfpf2vvAO=w640-h242",
                 "publishedAt": "2023-10-28T11:30:00Z",
                 "content": "During the reconnaissance phase, an attacker searches for any information about his target to create a profile that will later help him to identify possible ways to get in an organization. CloudPulse… [+2450 chars]"
-                }],
+                }
+            ],
             loading: true,
             page: 1,
             totalResults: 5
@@ -327,16 +329,16 @@ export class News extends Component {
         this.props.setProgress(30);
         let parsedData = await data.json();
         this.props.setProgress(70);
-        if(parsedData.articles !== 0){
+        if(parsedData.articles === undefined || parsedData.articles === null){
             this.setState({
-                articles: parsedData.articles,
-                totalResults: parsedData.totalResults,
-                loading: false,
+                loading: false
             })
         }
         else{
             this.setState({
-                loading: false
+                articles: parsedData.articles,
+                totalResults: parsedData.totalResults,
+                loading: false,
             })
         }
         this.props.setProgress(100);
@@ -360,18 +362,33 @@ export class News extends Component {
         this.props.setProgress(10);
         const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
         let data = await fetch(url);
-        this.props.setProgress(30);
-        let parsedData = await data.json();
-        this.props.setProgress(70);
-        if(parsedData.articles !== 0){
+        console.log(data);
+        if(!data.ok){
             this.setState({
-                articles: this.state.articles.concat(parsedData.articles),
-                totalResults: parsedData.totalResults,
-                page:this.state.page+1,
-                // loading:true
+                loading: false,
+                totalResults: this.state.articles.length
             })
+            this.props.setProgress(100);
         }
-        this.props.setProgress(100);
+        else{
+            this.props.setProgress(30);
+            let parsedData = await data.json();
+            this.props.setProgress(70);
+            if(parsedData.articles !== undefined || parsedData.articles !== null){
+                this.setState({
+                    articles: this.state.articles.concat(parsedData.articles),
+                    totalResults: parsedData.totalResults,
+                    page:this.state.page+1,
+                    // loading:true
+                })
+            }
+            else{
+                this.setState({
+                    loading: false
+                })
+            }
+            this.props.setProgress(100);
+        }
     }
 
     render() {
